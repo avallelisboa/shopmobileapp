@@ -1,0 +1,57 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+h1{
+    text-align: center;
+}
+a{
+    text-decoration: underline;
+}
+
+header{
+    padding: 10px;
+}
+
+header section{
+    display: inline-block;
+    padding: 0px auto;
+    width:20%;
+    margin:0px;
+}
+header nav{
+    width:80%;
+    text-align: left;
+    float:left;
+    margin:0px;
+}
+header nav ul{
+    text-align: left;
+}
+header nav ul li{
+    display:inline-block;
+    list-style-type: none;
+    border: solid 2px black;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+}
+#userEmail{
+    line-height: 250%;
+}
+.center{
+    text-align: center;
+    margin: auto;
+}
+.popover{
+    position: relative !important;
+    margin: 250px auto !important;
+}
+.popover__content{
+    position: relative !important;
+    margin: auto !important;
+    text-align: center !important;
+}
+#mapid { height: 500px; }
