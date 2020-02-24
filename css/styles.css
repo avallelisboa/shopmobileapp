@@ -55,3 +55,18 @@ header nav ul li{
     text-align: center !important;
 }
 #mapid { height: 500px; }
+#productsList td{
+    text-align:center;
+    margin-right: 5%;
+}
+#filterDiv{
+    text-align: center;
+}
+#filterDiv input{
+    text-align: center;
+    padding: 5px;
+    background-color: #efeff4;
+    border-radius: 20px;
+    border: solid 1px gray;
+    font-size: 150%;
+}

@@ -117,9 +117,18 @@
         </header>
         <h1>HOME</h1>
         <section>
-          <table>
-
-          </table>
+            <div id="filterDiv">
+                <input onchange="getProducts($(this.value))" type="text" id="productsFilter" placeholder="Ingrese su búsqueda"></input>
+            </div>
+            
+            <table id="productsList">
+                <tr>
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>Foto</th>
+                  <th>Número de sucursales</th>
+                </tr>
+            </table>
         </section>
         </ons-page>
     </template>
@@ -134,7 +143,7 @@
             </ul>
           </nav>
           <section>          
-            <ons-button onclick="logout()">Salir</ons-button>
+            <ons-button style="float:right" onclick="logout()">Salir</ons-button>
             <label id="userEmail">Bienvenido</label>
           </section>          
         </header>
