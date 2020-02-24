@@ -99,7 +99,7 @@ function getProducts(search){
         if(search == null){
           $("#productsList").append(`
           <tr>
-            <td><img src="${element.photo}" width="100" height="100"></td>
+            <td><img src="${element.photo}" width="80" height="80"></td>
             <td>${element.name}</td>
             <td>${element.price}</td>
             <td>${element.branches.length}</td>
@@ -138,7 +138,7 @@ function logout(){
   navigatorComponent.resetToPage('login.html');
 }
 
-function drawMap(branches){
+function drawMap(branches, maxDistance){
     window.navigator.geolocation.getCurrentPosition(function(pos){
     var crd = pos.coords;
     var map = L.map("mapid").setView([crd.latitude, crd.longitude], 15);
@@ -148,7 +148,7 @@ function drawMap(branches){
     }).addTo(map);
     if(branches != null){
         branches.forEach(function(suc){
-          if(distance(crd.latitude, crd.longitude, suc.latitude, suc.longitude,"K") < 10){
+          if(distance(crd.latitude, crd.longitude, suc.latitude, suc.longitude,"K") < maxDistance){
             L.marker([suc.latitude, suc.longitude]).addTo(map)
             .bindPopup(`${suc.name}`);
           }
@@ -176,9 +176,10 @@ function drawMap(branches){
 
 function goToMap(_branches){
   var branches = _branches;
+  var maxDistance = parseInt($("#maxDistance").val());
   const navigatorComponent = document.querySelector("#navigator");
   navigatorComponent.resetToPage('map.html');
-  drawMap(branches);
+  drawMap(branches, maxDistance);
 }
 
 

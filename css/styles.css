@@ -62,11 +62,20 @@ header nav ul li{
 #filterDiv{
     text-align: center;
 }
-#filterDiv input{
+#filterDiv input[type="text"]{
     text-align: center;
     padding: 5px;
     background-color: #efeff4;
     border-radius: 20px;
+    border: solid 1px gray;
+    font-size: 150%;
+}
+#filterDiv input[type="number"]{
+    text-align: center;
+    width:50px;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: #efeff4;
     border: solid 1px gray;
     font-size: 150%;
 }
