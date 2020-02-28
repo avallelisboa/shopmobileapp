@@ -9,7 +9,7 @@ ons.ready(()=>{
 
 document.addEventListener('init', (event)=>{
   var id = event.target.id;
-  if(id =="home" || id == "map"){
+  if(id =="home" || id == "map" || id == "searches"){
     document.getElementById("userEmail").innerText = "Bienvenido " + localStorage.getItem("email");
   }
 });
@@ -83,45 +83,55 @@ function login(){
 }
 
 function getProducts(search){
+  localStorage.removeItem("searchResult");
+
   getProductsService((products)=>{
     $("#productsList").html('');
-    $("#productsList").append(`                                    
-                              <tr>
-                                <th></th>
-                                <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Número de sucursales</th>
-                                <th>Descripción</th>                                
-                              </tr>`
-                            );
-      products.forEach((element)=>{
-        console.log(element);
         if(search == null){
+          localStorage.setItem("searchResult", JSON.stringify(products));
+          products.forEach((element)=>{        
           $("#productsList").append(`
-          <tr>
-            <td><img src="${element.photo}" width="80" height="80"></td>
-            <td>${element.name}</td>
-            <td>${element.price}</td>
-            <td>${element.branches.length}</td>
-            <td>${element.description}</td>            
-            <td><ons-button onClick='goToMap(${JSON.stringify(element.branches)})'>Ver sucursales</ons-button></td>
-          </tr>
-        `);
+            <ons-list-item>
+              <figure class="left">
+                <img src="${element.photo}" width="60" height="60"></td>
+              </figure>
+              <div>
+                <p>${element.name}</p>
+                <p>${element.description}</p>
+                <p>Precio: ${element.price}</p>
+                <p>Cantidad de sucursales: ${element.branches.length}</p>     
+              </div>
+              <ons-button onClick='goToMap(${JSON.stringify(element.branches)})'>Ver sucursales</ons-button>
+            </ons-list-item>
+          `);
+        });
         }
         else{
-          if(element.name.toLowerCase().includes(search.selector.toLowerCase()))
-              $("#productsList").append(`
-                                    <tr>
-                                      <td><img src="${element.photo}" width="100" height="100"></td>
-                                      <td>${element.name}</td>
-                                      <td>${element.price}</td>
-                                      <td>${element.branches.length}</td>
-                                      <td>${element.description}</td>                                      
-                                      <td><ons-button onClick='goToMap(${JSON.stringify(element.branches)})'>Ver sucursales</ons-button></td>
-                                    </tr>
-                                  `);
+          var filteredProducts = new Array();
+          products.forEach((element)=>{
+            if(element.name.toLowerCase().includes(search.selector.toLowerCase()))
+             {       
+                filteredProducts.push(element);
+               
+                $("#productsList").append(`
+                    <ons-list-item class="list-item">
+                      <figure class="left">
+                        <img src="${element.photo}" width="60" height="60">
+                      </figure>
+                      <div>
+                          <p>${element.name}</p>                          
+                          <p>${element.description}</p>
+                          <p>Precio: ${element.price}</p>
+                          <p>Cantidad de sucursales: ${element.branches.length}</p>          
+                      </div>
+                      <ons-button onClick='goToMap(${JSON.stringify(element.branches)})'>Ver sucursales</ons-button>
+                    </ons-list-item>
+                  `);
+             }
+          });
+          localStorage.setItem("searchResult", JSON.stringify(filteredProducts));
         }      
-      });
+      
   });
 }
 
@@ -205,3 +215,20 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 	}
 }
 
+function saveSearch(description){
+  saveSearchDB(localStorage.getItem("id"), description);
+  $("#searchDescription").val('');
+}
+
+function goToSearch(){
+  const navigatorComponent = document.querySelector("#navigator");
+  navigatorComponent.resetToPage('searches.html');
+}
+
+document.addEventListener('init', (event)=>{
+  var id = event.target.id;
+  if(id =="searches"){
+    var searches = getSearchesDB(localStorage.getItem("id"));
+
+  }
+});
