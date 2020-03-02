@@ -228,7 +228,21 @@ function goToSearch(){
 document.addEventListener('init', (event)=>{
   var id = event.target.id;
   if(id =="searches"){
-    var searches = getSearchesDB(localStorage.getItem("id"));
+      $("#searchesList").html('');
+      getSearchesDB(localStorage.getItem("id"),(res)=>{
+        var l = res.length;
+        for(var i = 0; i < l; i++){
+          $("#searchesList").append(`
 
+                  <ons-list-item class="list-item">
+                    <div>
+                        <p>${res[i].description}</p>                          
+                        <p>${res[i].searchDate}</p>          
+                    </div>
+                  </ons-list-item>
+          
+          `);
+        }
+      });
   }
 });

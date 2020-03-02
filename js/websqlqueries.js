@@ -13,13 +13,18 @@ function saveSearchDB(userId, description){
     });
 }
 
-function getSearchesDB(userId){
+function getSearchesDB(userId, _do){
+    var res;
     db.transaction((tx)=>{
-        var query= `SELECT * FROM SEARCHES WHERE userId = ${userId}`;
-        tx.executeSql(query);
+        var query= `SELECT * FROM SEARCHES WHERE userId = "${userId}" ORDER BY searchDate DESC`;
+        tx.executeSql(query,[],(tx, result)=>{
+            res = result.rows;
+        },(err)=>{
+            console.log(err);
+        });
     },(err)=>{
         console.log(err);
     },(tx, result)=>{
-        return result;
+        _do(res);
     });
 }
