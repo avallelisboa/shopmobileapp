@@ -3,12 +3,12 @@
         xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "com.base.app"
         version     = "1.0.0" >
-    <name>Aplicación Base</name>
+    <name>Tienda</name>
     <description>
-        Aplicación PhoneGap ORT
+        Tienda obligatorio Andrés Valle Lisboa
     </description>
-    <author href="http://www.ort.edu.uy/" email="info@ort.edu.uy">
-      ORT
+    <author href="http://www.ort.edu.uy/" email="avallelisboa@gmail.com">
+      Andruzz
     </author>
     <!-- https://build.phonegap.com/current-support -->
     <preference name="phonegap-version" value="cli-9.0.0" />
