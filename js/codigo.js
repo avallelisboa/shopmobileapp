@@ -88,7 +88,7 @@ function getProducts(search){
   getProductsService((products)=>{
     $("#productsList").html('');
         if(search == null){
-          localStorage.setItem("searchResult", JSON.stringify(products));
+          localStorage.setItem("products", JSON.stringify(products));
           products.forEach((element)=>{        
           $("#productsList").append(`
             <ons-list-item>
@@ -260,8 +260,14 @@ function goToProductScan(){
 function scanCode(){
   cordova.plugins.barcodeScanner.scan(
     function (result) {
+      var text = result.text;
+      var parts = text.split(',', 2);
 
-        $("#productScannedList").html('');
+      var array_id = part[0].split(':', 2);
+      var _id = array_id[1];
+
+      var array_ingredients = text.split('[]', 2);
+      var ingredients = array_ingredients[1].split(',');
 
         $("#productScannedList").append(`
             <ons-list-item class="list-item">
@@ -271,10 +277,24 @@ function scanCode(){
             </ons-list-item>
         `);
 
-     /*   alert("We got a barcode\n" +
-              "Result: " + result.text + "\n" +
-              "Format: " + result.format + "\n" +
-              "Cancelled: " + result.cancelled);*/
+      var products = JSON.parse(localStorage.getItem("products"));
+      
+      products.forEach((element)=>{
+        if(element._id == _id){
+          $("#productScannedList").append(`
+            <ons-list-item class="list-item">
+              <figure>
+                <img src="${element.photo}" width="60" height="60">
+              </figure>
+              <div>
+                  <p>Nombre: ${element.name}<p>
+                  <p>Precio: ${element.price}<p>
+                  <p>Descripción: ${element.description}<p>
+              </div>
+            </ons-list-item>
+        `);
+        }
+      });
     },
     function (error) {
         alert("Scanning failed: " + error);
