@@ -3,11 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>Tienda</title>
-       <script
-      type="text/javascript"
-      src="js/jquery-1.8.3.min.js"
-      charset="UTF-8"
-    ></script>
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
   <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
@@ -17,10 +12,18 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script> 
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-1.8.3.min.js"
+      charset="UTF-8"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="js/services.js" type="text/javascript"></script>
     <script src="./js/codigo.js"></script>
     <script src="js/websqlqueries.js" type="text/javascript"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+
+
     <link rel="stylesheet" type="text/css" href="css/styles.css">
   </head>
   <body>
@@ -117,7 +120,7 @@
         </header>
         <h1>
           <p>HOME</p>
-          <ons-button id="scanButton" onclick="scanCode()">Leer Qr</ons-button>
+          <ons-button id="scanButton" onclick="goToProductScan()">Leer Qr</ons-button>
         </h1>        
         <section>
             <div id="filterDiv">
@@ -187,9 +190,9 @@
             <ons-button onclick="goToProducts()">Volver</ons-button>
         </header>
         <section>
-            <article id="productScanned">
-              
-            </article>
+            <ons-list id="productScanned">
+                
+            </ons-list>
         </section>
       </ons-page>
     </template>
