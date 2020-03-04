@@ -260,10 +260,21 @@ function goToProductScan(){
 function scanCode(){
   cordova.plugins.barcodeScanner.scan(
     function (result) {
-        alert("We got a barcode\n" +
+
+        $("#productScannedList").html('');
+
+        $("#productScannedList").append(`
+            <ons-list-item class="list-item">
+              <div>
+                  ${result.text}        
+              </div>
+            </ons-list-item>
+        `);
+
+     /*   alert("We got a barcode\n" +
               "Result: " + result.text + "\n" +
               "Format: " + result.format + "\n" +
-              "Cancelled: " + result.cancelled);
+              "Cancelled: " + result.cancelled);*/
     },
     function (error) {
         alert("Scanning failed: " + error);
