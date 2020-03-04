@@ -73,8 +73,11 @@ section figure{
     height: 500px;
 }
 
-#productsList div p, #searchesList div p{
+#productsList div p, #searchesList div p, #productScanned span p{
     text-align:left;
+}
+#productScanned figure{
+    float: left;
 }
 #filterDiv, #saveSearchDiv{
     text-align: center;
